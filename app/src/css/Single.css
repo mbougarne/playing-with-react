@@ -1,0 +1,9 @@
+.price-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.badge-price{
+    background-color: #ff793f;
+    color: white;
+}
