@@ -1,11 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
+
+import NotificationContext from '../context/NotificationContenxt'
 
 import '../css/Notification.css'
 
 export default () =>
 {
-    let isSuccess = true
-    let classesNames = 'notification-bar ' + (isSuccess ? ' success' : ' error')
+    let {notify} = useContext(NotificationContext)
+
+    let classesNames = 'notification-bar ' + (notify.success ? ' success' : ' error')
     // let classesNames = (isSuccess) ? `notification-bar success` : 'notification-bar error'
     // <div className={'notification-bar ' + (isSuccess ? ' success' : ' error')}>
 
@@ -14,7 +17,7 @@ export default () =>
             <div className="row">
                 <div className="col-12">
                     <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis enim ea, tempora dignissimos molestias error non doloremque itaque dolorem doloribus
+                        {notify.message}
                     </p>
                 </div>
             </div>

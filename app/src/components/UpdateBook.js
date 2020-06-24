@@ -1,6 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 
 import { useParams, useHistory } from 'react-router-dom'
+
+import NotificationContext from '../context/NotificationContenxt'
 
 import '../css/update-book.css'
 
@@ -20,7 +22,7 @@ function UpdateBook()
     let {id} = useParams()
     let [book, setBook] = useState(initBook)
     let [cover, setCover] = useState()
-    let [bookUasUpdated, setBookUpdated] = useState(false)
+    let {notify, setNotify} = useContext(NotificationContext)
     
     useEffect( () => {
 
@@ -75,7 +77,23 @@ function UpdateBook()
             let response = await fetch(url, options)
             let data = await response.json()
             
-            return (data.success) ? history.push('/books/' + book.id) : false
+            if(data.success)
+            {
+                setNotify({
+                    ...notify,
+                    show: true,
+                    success: true,
+                    message: 'The book has updated succeffully'
+                })
+                history.push('/books/' + book.id)
+            } else{
+                setNotify({
+                    ...notify,
+                    show: true,
+                    success: false,
+                    message: data.message
+                })
+            }
         })()
     }
 
