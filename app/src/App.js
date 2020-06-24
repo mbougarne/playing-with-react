@@ -11,6 +11,7 @@ import UpdateBook from './pages/UpdateBook'
 
 import Navigation from './components/Navigation'
 import Icon from './components/FontIcon'
+import Notification from './components/Notification'
 
 function App()
 {
@@ -22,7 +23,9 @@ function App()
     return (
         <NavigationContext.Provider value={[showMenu, setMenu]}>
             <Router>
-
+                {/* Notifications */}
+                <Notification />
+                {/* Bars */}
                 <div className="nav-toggle-container" onClick={() => setMenu(showMenu = !showMenu)}>
                     <Icon name="fas fa-bars"/>
                 </div>
