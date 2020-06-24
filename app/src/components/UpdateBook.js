@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
 
-import { useParams, Redirect } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 
 import '../css/update-book.css'
 
 function UpdateBook()
 {
+    let history = useHistory()
     let initBook = {
         id: '',
         title: '',
@@ -74,13 +75,12 @@ function UpdateBook()
             let response = await fetch(url, options)
             let data = await response.json()
             
-            return (data.success) ? setBookUpdated(true) : false
+            return (data.success) ? history.push('/books/' + book.id) : false
         })()
     }
 
     return (
         <React.Fragment>
-            { bookUasUpdated ? <Redirect to={'/books/' + book.id} /> : ''}
             {/* Jumbotron */}
             <div className="row">
                 <div className="col-12">

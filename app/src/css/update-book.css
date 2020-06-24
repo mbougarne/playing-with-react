@@ -12,3 +12,8 @@ input.form-control{
     font-size: .9rem;
     color: #737577;
 }
+
+textarea.form-control{
+    height: auto;
+    min-height: 75px;
+}
