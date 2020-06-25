@@ -19,9 +19,12 @@ function AddBook()
     let [book, setBook] = useState(initBook)
     let [cover, setCover] = useState()
     let [tempCover, setTempCover] = useState('')
+    
+    let [hasError, setHasError] = useState(false)
+    let [inputError, setInputError] = useState('')
 
     let { setNotify } = useContext(NotificationContext)
-
+    
     // Add Book
     const onAddBook = (e) => {
         
@@ -59,6 +62,31 @@ function AddBook()
                 })
                 history.push('/books/' + data.book._id)
             } else{
+
+                if(data.message.toLowerCase().includes('title'))
+                {
+                    setHasError(true)
+                    setInputError('title')
+                }
+
+                if(data.message.toLowerCase().includes('author'))
+                {
+                    setHasError(true)
+                    setInputError('author')
+                }
+
+                if(data.message.toLowerCase().includes('price'))
+                {
+                    setHasError(true)
+                    setInputError('price')
+                }
+
+                if(data.message.toLowerCase().includes('isbn'))
+                {
+                    setHasError(true)
+                    setInputError('isbn')
+                }
+
                 setNotify({
                     show: true,
                     success: false,
@@ -76,6 +104,8 @@ function AddBook()
         setTempCover(URL.createObjectURL(e.target.files[0]))
         
     }
+
+    let inValidCLass = name => (hasError && inputError === name) ? 'is-invalid' : ''
 
     return (
         <div className="row">
@@ -107,10 +137,19 @@ function AddBook()
                                 <input 
                                     type="text"
                                     id="title"
-                                    className="form-control shadow-sm"
+                                    className={'form-control shadow-sm ' + inValidCLass('title')}
                                     name="title"
                                     value={book.title}
                                     onChange={onInputChange}/>
+                                    {
+                                        (hasError && inputError === 'title')
+                                        ?
+                                        <div className="invalid-feedback">
+                                            The title is required
+                                        </div>
+                                        :
+                                        ''
+                                    }
                             </div>
                             {/* Author */}
                             <div className="form-group row">
@@ -118,10 +157,19 @@ function AddBook()
                                 <input 
                                     type="text"
                                     id="author"
-                                    className="form-control"
+                                    className={'form-control shadow-sm ' + inValidCLass('author')}
                                     name="author"
                                     value={book.author}
                                     onChange={onInputChange}/>
+                                    {
+                                        (hasError && inputError === 'author')
+                                        ?
+                                        <div className="invalid-feedback">
+                                            The author is required
+                                        </div>
+                                        :
+                                        ''
+                                    }
                             </div>
                             {/* ISBN */}
                             <div className="form-group row">
@@ -129,20 +177,19 @@ function AddBook()
                                 <input 
                                     type="text"
                                     id="isbn"
-                                    className="form-control"
+                                    className={'form-control shadow-sm ' + inValidCLass('isbn')}
                                     name="isbn"
                                     value={book.isbn}
                                     onChange={onInputChange}/>
-                            </div>
-                            {/* Description */}
-                            <div className="form-group row">
-                                <label htmlFor="description"><b>Description</b></label>
-                                <textarea
-                                    id="description"
-                                    className="form-control"
-                                    name="description"
-                                    value={book.description}
-                                    onChange={onInputChange}/>
+                                    {
+                                        (hasError && inputError === 'isbn')
+                                        ?
+                                        <div className="invalid-feedback">
+                                            The ISBN is required
+                                        </div>
+                                        :
+                                        ''
+                                    }
                             </div>
                             {/* Price */}
                             <div className="form-group row">
@@ -150,10 +197,19 @@ function AddBook()
                                 <input 
                                     type="text"
                                     id="price"
-                                    className="form-control"
+                                    className={'form-control shadow-sm ' + inValidCLass('price')}
                                     name="price"
                                     value={book.price}
                                     onChange={onInputChange}/>
+                                    {
+                                        (hasError && inputError === 'price')
+                                        ?
+                                        <div className="invalid-feedback">
+                                            The price is required
+                                        </div>
+                                        :
+                                        ''
+                                    }
                             </div>
                             {/* Book Cover */}
                             <div className="form-group row">
@@ -164,7 +220,7 @@ function AddBook()
                                         {/* Custom Ffile */}
                                         <input
                                             type="file" 
-                                            className="custom-file-input"
+                                            className="custom-file-input form-control shadow-sm"
                                             id="bookCover"
                                             onChange={onCoverSelected}
                                             aria-describedby="bookCoverImage"/>
@@ -175,6 +231,16 @@ function AddBook()
                                         </label>
                                     </div>
                                 </div>
+                            </div>
+                            {/* Description */}
+                            <div className="form-group row">
+                                <label htmlFor="description"><b>Description</b></label>
+                                <textarea
+                                    id="description"
+                                    className="form-control form-control shadow-sm"
+                                    name="description"
+                                    value={book.description}
+                                    onChange={onInputChange}/>
                             </div>
                         </div>
                         {/* Submit */}
