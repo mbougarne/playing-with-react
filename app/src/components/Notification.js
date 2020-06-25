@@ -9,8 +9,6 @@ export default () =>
     let {notify} = useContext(NotificationContext)
 
     let classesNames = 'notification-bar ' + (notify.success ? ' success' : ' error')
-    // let classesNames = (isSuccess) ? `notification-bar success` : 'notification-bar error'
-    // <div className={'notification-bar ' + (isSuccess ? ' success' : ' error')}>
 
     return (
         <div className={classesNames}>
