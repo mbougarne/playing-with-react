@@ -1,0 +1,19 @@
+.custom-label{
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #a5a5a5;
+    font-size: 14px;
+}
+
+input.form-control{
+    min-height: 45px;
+    border: 1px solid #e1e4e6;
+    border-radius: 3px;
+    font-size: .9rem;
+    color: #737577;
+}
+
+textarea.form-control{
+    height: auto;
+    min-height: 75px;
+}

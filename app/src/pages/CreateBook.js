@@ -7,16 +7,14 @@ export default function CreateBook()
     return (
         <div className="container">
             {/* Jumbotron */}
-                <div className="jumbotron">
-                <div className="row">
-                    <div className="col-12">
-                        <h1 className="display-1">
-                            Add Book
-                        </h1>
-                        <p className="lead">
-                            Add new book to your list
-                        </p>
-                    </div>
+            <div className="row">
+                <div className="col-12">
+                    <h1 className="display-1">
+                        <b>Add Book</b>
+                    </h1>
+                    <p className="lead">
+                        Add new book to your list
+                    </p>
                 </div>
             </div>
             {/* Add Book Form */}
